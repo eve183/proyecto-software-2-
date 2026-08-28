@@ -1,2 +1,2 @@
-# Proyecto2
-Aqui guardaremos el codigo fuente de nuestro proyecto
+# proyecto-software-2-
+En este repositorio pondremos nuestro codigo madre del proyecto 2
