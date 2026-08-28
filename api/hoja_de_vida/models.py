@@ -1,23 +1,27 @@
-
 from django.db import models
-
-
-class Candidato(models.Model):
-    id = models.AutoField(primary_key=True)
-
-    class Meta:
-        db_table = 'candidato'
-        managed = False
 
 
 class HojaDeVida(models.Model):
     id = models.AutoField(primary_key=True)
-    urlArchivo = models.CharField(max_length=255, null=True, blank=True)
-    fechaCarga = models.DateField(null=True, blank=True)
-    tamanoMB = models.FloatField(null=True, blank=True)
+
+    urlArchivo = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True
+    )
+
+    fechaCarga = models.DateField(
+        null=True,
+        blank=True
+    )
+
+    tamanoMB = models.FloatField(
+        null=True,
+        blank=True
+    )
 
     candidato = models.OneToOneField(
-        Candidato,
+        'perfiles.Candidato',
         on_delete=models.CASCADE,
         db_column='candidato_id',
         null=True,
@@ -27,3 +31,6 @@ class HojaDeVida(models.Model):
     class Meta:
         db_table = 'hojadevida'
         managed = False
+
+    def __str__(self):
+        return f"Hoja de vida {self.id}"

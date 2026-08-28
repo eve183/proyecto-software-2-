@@ -1,12 +1,9 @@
 from django.urls import path
 
-from .views import (
-    listar_hojas_de_vida,
-    obtener_hoja_de_vida
-)
+from .views import hojas_de_vida, hoja_de_vida_detalle
 
 
 urlpatterns = [
-    path('', listar_hojas_de_vida, name='listar_hojas_de_vida'),
-    path('<int:id>/', obtener_hoja_de_vida, name='obtener_hoja_de_vida'),
+    path('', hojas_de_vida, name='hojas-de-vida'),
+    path('<int:id>/', hoja_de_vida_detalle, name='hoja-de-vida-detalle'),
 ]

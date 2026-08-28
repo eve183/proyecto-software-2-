@@ -38,8 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'rest_framework',
-    'api',
+
+    'api.usuarios',
+    'api.perfiles',
+    'api.hoja_de_vida',
+    'api.ofertas',
     'api.postulaciones',
     'api.notificaciones',
 ]
@@ -84,7 +89,7 @@ DATABASES = {
         'NAME': os.getenv('DB_NAME', 'findwork'),
         'USER': os.getenv('DB_USER', 'root'),
         'PASSWORD': os.getenv('DB_PASSWORD', '123456'),
-        'HOST': os.getenv('DB_HOST', 'mysql'),
+        'HOST': os.getenv('DB_HOST', 'localhost'),
         'PORT': os.getenv('DB_PORT', '3306'),
     }
 }

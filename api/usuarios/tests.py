@@ -1,3 +1,6 @@
-from django.test import TestCase
+from django.apps import AppConfig
 
-# Create your tests here.
+
+class UsuariosConfig(AppConfig):
+    default_auto_field = 'django.db.models.BigAutoField'
+    name = 'api.usuarios'

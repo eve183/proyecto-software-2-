@@ -1,5 +1,3 @@
 from django.test import TestCase
 
-
-class PostulacionesTests(TestCase):
-    pass
+# Create your tests here.

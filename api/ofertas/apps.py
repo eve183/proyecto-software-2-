@@ -2,4 +2,5 @@ from django.apps import AppConfig
 
 
 class OfertasConfig(AppConfig):
-    name = 'ofertas'
+    default_auto_field = 'django.db.models.BigAutoField'
+    name = 'api.ofertas'
