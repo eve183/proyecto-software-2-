@@ -3,37 +3,50 @@ import json
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 
+
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
 from .models import Notificacion
 
 
-@require_POST
-def crear_notificacion(request):
-	try:
-		datos = json.loads(request.body)
-		notificacion = Notificacion.objects.create(
-			destinatario=datos['destinatario'],
-			mensaje=datos['mensaje'],
-			enviada=datos.get('enviada', False),
-			usuario_id=datos['usuario_id'],
-		)
-	except (json.JSONDecodeError, KeyError, TypeError, ValueError):
-		return JsonResponse(
-			{
-				'error': (
-					'Envía destinatario, mensaje y usuario_id en formato JSON.'
-				)
-			},
-			status=400,
-		)
+@api_view(['GET'])
+def listar_notificaciones(request):
+    notificaciones = Notificacion.objects.all()
 
-	return JsonResponse(
-		{
-			'id': notificacion.id,
-			'destinatario': notificacion.destinatario,
-			'mensaje': notificacion.mensaje,
-			'fechaEnvio': notificacion.fechaEnvio,
-			'enviada': notificacion.enviada,
-			'usuario_id': notificacion.usuario_id,
-		},
-		status=201,
-	)
+    datos = []
+
+    for notificacion in notificaciones:
+        datos.append({
+            'id': notificacion.id,
+            'destinatario': notificacion.destinatario,
+            'mensaje': notificacion.mensaje,
+            'fechaEnvio': notificacion.fechaEnvio,
+            'enviada': notificacion.enviada,
+            'usuario_id': notificacion.usuario_id
+        })
+
+    return Response(datos)
+
+
+@api_view(['GET'])
+def obtener_notificacion(request, id):
+    try:
+        notificacion = Notificacion.objects.get(id=id)
+
+        datos = {
+            'id': notificacion.id,
+            'destinatario': notificacion.destinatario,
+            'mensaje': notificacion.mensaje,
+            'fechaEnvio': notificacion.fechaEnvio,
+            'enviada': notificacion.enviada,
+            'usuario_id': notificacion.usuario_id
+        }
+
+        return Response(datos)
+
+    except Notificacion.DoesNotExist:
+        return Response(
+            {'error': 'Notificación no encontrada'},
+            status=404
+        )
