@@ -1,5 +1,12 @@
 from django.urls import path
 
-app_name = 'postulaciones'
+from .views import (
+    listar_postulaciones,
+    obtener_postulacion
+)
 
-urlpatterns = []
+
+urlpatterns = [
+    path('', listar_postulaciones, name='listar_postulaciones'),
+    path('<int:id>/', obtener_postulacion, name='obtener_postulacion'),
+]

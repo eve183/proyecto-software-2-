@@ -1,5 +1,12 @@
 from django.urls import path
 
-app_name = 'notificaciones'
+from .views import (
+    listar_notificaciones,
+    obtener_notificacion
+)
 
-urlpatterns = []
+
+urlpatterns = [
+    path('', listar_notificaciones, name='listar_notificaciones'),
+    path('<int:id>/', obtener_notificacion, name='obtener_notificacion'),
+]
